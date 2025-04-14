@@ -1,219 +1,111 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brows by Woods | Natural Luxury Brow & Skin Treatments</title>
-  <meta name="description" content="Brows by Woods offers luxury spa-inspired brow and skin services in a serene, modern setting. Book brow shaping, LED facials, and custom skin treatments online." />
-  <meta name="keywords" content="Brows by Woods, luxury esthetician, brow services, facial, LED therapy, spa, brow lamination, Seattle esthetician" />
-  <meta name="author" content="Anthony Rodriguez" />
-  <meta property="og:title" content="Brows by Woods" />
-  <meta property="og:description" content="Luxury brow artistry & light-based skin treatments curated for your glow era." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mrarod.github.io/woodsbrows-booking/" />
-  <meta property="og:image" content="https://mrarod.github.io/woodsbrows-booking/assets/images/homepage.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Brows by Woods" />
-  <meta name="twitter:description" content="Luxury brow and skin services, curated for modern beauty seekers." />
-  <meta name="twitter:image" content="https://mrarod.github.io/woodsbrows-booking/assets/images/homepage.jpg" />
+  <title>Brows by Woods | Natural Luxury Brow & Skin Studio</title>
+  <meta name="description" content="Luxury brow artistry & LED facials crafted for your glow era." />
+  <meta name="keywords" content="brows, facial, spa, lamination, Seattle esthetician" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --nude-1: #f8f3f0;
-      --nude-2: #e4dcd5;
-      --nude-3: #c6b6a7;
+      --nude-2: #e7dfda;
+      --nude-3: #cab8aa;
       --accent: #5e4432;
     }
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
-    body, html {
-      scroll-behavior: smooth;
-      background-color: var(--nude-1);
+    body { background: var(--nude-1); color: var(--accent); scroll-behavior: smooth; }
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background-color: rgba(255,255,255,0.6); backdrop-filter: blur(10px);
+      padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 999;
+    }
+    nav ul {
+      display: flex; gap: 1.5rem; list-style: none;
+    }
+    nav a {
+      text-decoration: none; color: var(--accent); font-weight: 500;
     }
     .hero {
-      background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('assets/images/homepage.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
       position: relative;
-      animation: fadeIn 1.5s ease-in-out;
+      height: 100vh;
+      background: url('assets/images/homepage.jpg') top center no-repeat;
+      background-size: contain;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem; text-align: center; overflow: hidden;
+      animation: fadeIn 1.2s ease-in-out;
     }
-    .hero img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    @media (max-width: 768px) {
-      .hero {
-        background-position: top;
-      }
-      .hero-text h1 {
-        font-size: 2.5rem;
-      }
-      .hero-text p {
-        font-size: 1rem;
-      }
-    }
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      padding: 1.2rem 0;
-    }
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 2.5rem;
-    }
-    .navbar a {
-      text-decoration: none;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.8px;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    .navbar a:hover {
-      color: var(--nude-3);
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(248,243,240,0.85), rgba(248,243,240,0.95));
+      z-index: 1;
     }
     .hero-text {
-      background: rgba(255, 255, 255, 0.75);
-      padding: 3rem 4rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative; z-index: 2;
+      background: rgba(255,255,255,0.75); padding: 3rem;
+      border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease-in-out;
     }
     .hero-text h1 {
-      font-size: 3.5rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .hero-text p {
-      font-size: 1.2rem;
-      color: var(--nude-3);
-      max-width: 500px;
-      margin: 0 auto;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; margin-bottom: 1rem;
     }
     .cta-button {
-      margin-top: 2rem;
-      padding: 0.9rem 2rem;
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.8rem;
+      background-color: var(--accent); color: white;
+      border: none; border-radius: 30px; font-size: 1rem;
     }
-    .cta-button:hover {
-      background-color: #3e2f24;
-    }
-    section {
-      padding: 6rem 2rem;
-    }
-    #services {
-      background-color: var(--nude-2);
-      text-align: center;
-    }
-    #services h2, #book h2, #faq h2, #about h2 {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 3rem;
-    }
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
+    section { padding: 5rem 2rem; max-width: 1000px; margin: auto; }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
     }
     .service-card {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    }
-    .service-card h3 {
-      color: var(--accent);
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
-    .service-card p {
-      color: #555;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    #book .calendly-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      height: 700px;
-    }
-    .calendly-inline-widget {
-      width: 100%;
-      height: 100%;
-    }
-    .faq-item {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      background-color: white;
-      border-radius: 8px;
+      background: white; border-radius: 10px; padding: 2rem;
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      padding: 1.5rem 2rem;
+      transition: transform 0.3s ease;
     }
-    .faq-item h4 {
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .faq-item p {
-      color: #444;
-      font-size: 0.95rem;
-    }
-    #about {
+    .service-card:hover { transform: scale(1.02); }
+    .testimonial-banner {
       background-color: var(--nude-2);
-      text-align: center;
+      padding: 2rem; text-align: center; font-style: italic;
+      font-size: 1.1rem; color: var(--accent);
     }
-    #about p {
-      max-width: 800px;
-      margin: 0 auto;
-      color: #444;
-      font-size: 1rem;
-      line-height: 1.8;
+    footer {
+      text-align: center; padding: 2rem;
+      background-color: var(--nude-3); color: white;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .hero { background-size: cover; background-position: center top; }
+      .hero-text h1 { font-size: 2rem; }
+      nav ul { flex-direction: column; gap: 1rem; }
     }
   </style>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
+  <nav>
+    <div><strong>Brows by Woods</strong></div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
   <section class="hero">
-    <nav class="navbar">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#book">Book</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#about">About Us</a></li>
-      </ul>
-    </nav>
     <div class="hero-text">
       <h1>Brows by Woods</h1>
       <p>Luxury brow artistry & skin treatments crafted for your glow era.</p>
@@ -221,54 +113,53 @@
     </div>
   </section>
 
+  <section class="testimonial-banner">
+    “My brows have never looked this good.” — Elle R.
+  </section>
+
   <section id="services">
-    <h2>Our Signature Services</h2>
-    <div class="service-grid">
+    <h2 style="text-align:center; font-family:'Playfair Display', serif;">Our Signature Services</h2>
+    <div class="grid">
       <div class="service-card">
         <h3>Glow Up Flash Facial</h3>
-        <p>Quick enzyme exfoliation and LED therapy to instantly brighten and refresh the skin.</p>
+        <p>20 min enzyme + LED glow session. Quick, plumping, and pre-event ready.</p>
       </div>
       <div class="service-card">
         <h3>Luminous Lip Light</h3>
-        <p>Hydrating lip treatment with exfoliation and red light therapy for a soft, plump finish.</p>
+        <p>Hydrating red light therapy focused on plumping and softening.</p>
       </div>
       <div class="service-card">
         <h3>Brow Rehab LED</h3>
-        <p>Red LED paired with soothing mask post-wax or tint to calm skin and elevate your brow session.</p>
+        <p>Post-wax LED and cooling mask to reduce redness and nourish skin.</p>
       </div>
       <div class="service-card">
-        <h3>Breakout Buster</h3>
-        <p>Spot-focused light therapy and mask to clarify and soothe blemish-prone areas fast.</p>
+        <h3>Sunset Fade: Pigment Reset</h3>
+        <p>LED and brightening serums designed to soften hyperpigmentation.</p>
       </div>
     </div>
   </section>
 
   <section id="book">
-    <h2>Book Your Appointment</h2>
-    <div class="calendly-container">
-      <div class="calendly-inline-widget" data-url="https://calendly.com/broker-rodriguez/schedule"></div>
+    <h2 style="text-align:center; font-family:'Playfair Display', serif;">Book an Appointment</h2>
+    <div style="max-width:1000px; margin:auto; height:700px;">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/broker-rodriguez/schedule" style="min-width:320px;height:100%;"></div>
     </div>
   </section>
 
   <section id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <h4>What should I do before my appointment?</h4>
-      <p>Arrive with clean skin and avoid applying heavy makeup or exfoliants the day of your treatment.</p>
-    </div>
-    <div class="faq-item">
-      <h4>How long do the results last?</h4>
-      <p>Depending on the service, results can last from 1 week to 6 weeks. We’ll recommend a maintenance plan tailored to your skin.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Is LED therapy safe for sensitive skin?</h4>
-      <p>Yes, we use non-invasive light therapy designed to soothe and support even the most delicate skin types.</p>
-    </div>
+    <h2 style="text-align:center; font-family:'Playfair Display', serif;">FAQs</h2>
+    <p><strong>Q:</strong> Is LED safe for sensitive skin?<br><strong>A:</strong> Yes! It’s non-invasive and gentle on all skin types.</p>
+    <p><strong>Q:</strong> What’s best before my treatment?<br><strong>A:</strong> Come with clean skin and skip actives 24 hrs before.</p>
   </section>
 
   <section id="about">
-    <h2>About Us</h2>
-    <p>Brows by Woods is a spa-inspired experience rooted in natural beauty and confidence. We specialize in curated brow treatments and light-based skin services designed for modern glow-seekers. Every session is about luxury, intention, and making you feel like the best version of yourself.</p>
+    <h2 style="text-align:center; font-family:'Playfair Display', serif;">About Us</h2>
+    <p>Brows by Woods is rooted in natural, spa-driven beauty — offering curated treatments in a space made to feel like a breath of fresh air. We specialize in glow-boosting facials and elegant brow design for clients who value clean, intentional self-care.</p>
   </section>
+
+  <footer>
+    &copy; 2025 Brows by Woods. All rights reserved.
+  </footer>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
