@@ -1,1 +1,267 @@
 <!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n</head>\n<body>\n    <h1>Hello, World!</h1>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineCal: Anthony’s Content Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cineBlack: '#0a0a0a',
+                        cineDark: '#1a1a1a',
+                        cineGreen: '#39ff14',
+                        cineGray: '#2a2a2a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: white; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #39ff14; }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-cineDark border-r border-gray-800 flex flex-col justify-between p-6">
+        <div>
+            <h1 class="text-2xl font-bold tracking-tighter mb-1">CineCal</h1>
+            <p class="text-xs text-gray-400 mb-8 tracking-widest uppercase">Anthony’s Engine</p>
+            <nav class="space-y-4">
+                <a href="#" class="block py-2 px-4 bg-cineBlack border-l-2 border-cineGreen text-cineGreen font-medium">Dashboard</a>
+                <a href="#" class="block py-2 px-4 text-gray-400 hover:text-white transition">Archive</a>
+                <a href="#" class="block py-2 px-4 text-gray-400 hover:text-white transition">Settings</a>
+            </nav>
+        </div>
+        <div class="space-y-3">
+            <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-cineGreen rounded-full animate-pulse"></div>
+                <span class="text-sm text-gray-300">Veo 3: Online</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col relative">
+        <header class="h-20 border-b border-gray-800 flex items-center justify-between px-8 bg-cineDark/50 backdrop-blur-md">
+            <h2 class="text-xl font-semibold">Weekly Cycle: <span class="text-gray-400 font-normal">Week 2 (Feb 12 - Feb 16)</span></h2>
+            <button class="border border-cineGreen text-cineGreen px-6 py-2 rounded uppercase text-xs font-bold hover:bg-cineGreen hover:text-black transition shadow-[0_0_15px_rgba(57,255,20,0.3)]">
+                Generate Week 3
+            </button>
+        </header>
+
+        <div class="flex-1 p-8 overflow-y-auto">
+            <div id="dashboardGrid" class="grid grid-cols-5 gap-4 mb-8">
+                </div>
+
+            <div class="grid grid-cols-3 gap-6">
+                <div class="bg-cineDark p-6 rounded border border-gray-800">
+                    <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-4">Veo 3 Quick Gen</h3>
+                    <textarea class="w-full bg-cineBlack border border-gray-700 rounded p-3 text-sm text-gray-300 focus:border-cineGreen outline-none h-24" placeholder="Describe scene..."></textarea>
+                    <button class="w-full mt-3 bg-gray-800 text-white py-2 rounded text-xs uppercase hover:bg-gray-700">Generate Preview</button>
+                </div>
+                 <div class="bg-cineDark p-6 rounded border border-gray-800 flex items-center justify-center flex-col">
+                    <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2">Completion</h3>
+                    <div class="text-5xl font-bold text-white mb-1">0/5</div>
+                    <div class="text-xs text-cineGreen">Posts posted</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="editorModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-end">
+        <div class="w-2/3 h-full bg-cineBlack border-l border-gray-800 shadow-2xl overflow-y-auto transform transition-transform duration-300 translate-x-full" id="modalContent">
+            
+            <div class="sticky top-0 bg-cineBlack/95 backdrop-blur z-10 border-b border-gray-800 p-6 flex justify-between items-center">
+                <div>
+                    <h2 id="modalTitle" class="text-2xl font-bold text-white flex items-center">MONDAY</h2>
+                </div>
+                <button onclick="closeModal()" class="px-4 py-2 border border-red-500 text-red-500 rounded text-sm hover:bg-red-500 hover:text-white transition">Close</button>
+            </div>
+
+            <div class="p-8 grid grid-cols-2 gap-8">
+                <div class="space-y-8">
+                    <section>
+                        <h3 class="text-cineGreen text-xs font-bold uppercase tracking-widest mb-4">📝 Hook & Title</h3>
+                        <div class="space-y-4">
+                            <div><label class="text-xs text-gray-500">Main Hook</label><input id="inpMainHook" type="text" class="w-full bg-cineDark border border-gray-700 p-3 rounded text-white focus:border-cineGreen outline-none"></div>
+                            <div><label class="text-xs text-gray-500">Alt Hook</label><input id="inpAltHook" type="text" class="w-full bg-cineDark border border-gray-700 p-3 rounded text-gray-400 focus:border-cineGreen outline-none"></div>
+                            <div><label class="text-xs text-gray-500">Text On Screen</label><input id="inpOnScreen" type="text" class="w-full bg-cineDark border border-gray-700 p-3 rounded text-gray-400 focus:border-cineGreen outline-none font-bold"></div>
+                        </div>
+                    </section>
+                    <section class="bg-cineDark p-4 rounded border border-gray-800 hover:border-cineGreen transition">
+                        <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">🤖 Veo 3 Scene Prompt</h3>
+                        <p id="txtVeoPrompt" class="text-sm text-gray-300 leading-relaxed italic"></p>
+                    </section>
+                    <section>
+                        <h3 class="text-cineGreen text-xs font-bold uppercase tracking-widest mb-4">🗣️ Script</h3>
+                        <div class="bg-cineDark border border-gray-700 rounded p-4 space-y-4">
+                            <div><span class="text-xs text-gray-500 uppercase">Opening</span><p id="txtScriptOpen" class="text-sm"></p></div>
+                            <div><span class="text-xs text-gray-500 uppercase">Body</span><p id="txtScriptBody" class="text-sm"></p></div>
+                            <div><span class="text-xs text-gray-500 uppercase">CTA</span><p id="txtScriptCTA" class="text-sm"></p></div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="space-y-8">
+                    <section>
+                         <h3 class="text-cineGreen text-xs font-bold uppercase tracking-widest mb-4">🎥 Shot List</h3>
+                         <div class="bg-cineDark rounded border border-gray-800 overflow-hidden">
+                             <table class="w-full text-left text-sm text-gray-400">
+                                 <thead class="bg-gray-800 text-gray-200 uppercase text-xs">
+                                     <tr><th class="p-2">Shot</th><th class="p-2">Framing</th><th class="p-2">FPS</th></tr>
+                                 </thead>
+                                 <tbody id="tableShots" class="divide-y divide-gray-800"></tbody>
+                             </table>
+                         </div>
+                    </section>
+                    <section class="bg-gray-900 p-4 rounded border border-gray-800">
+                        <h3 id="txtGradePalette" class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">🎨 Grade</h3>
+                        <div class="grid grid-cols-2 gap-4 text-xs">
+                            <div class="flex justify-between p-2 bg-black rounded"><span>Shadows</span><span id="colShadow" class="text-cineGreen"></span></div>
+                            <div class="flex justify-between p-2 bg-black rounded"><span>Highlights</span><span id="colHigh" class="text-white"></span></div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="text-cineGreen text-xs font-bold uppercase tracking-widest mb-4">☑️ Daily Protocol</h3>
+                        <div id="listChecklist" class="space-y-2"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. THE DATA (JSON Injection)
+        const week2Data = [
+            {
+                "day": "Monday", "theme": "Cinematic Anchor", "hook": { "main": "Your visuals are forgettable because they lack friction.", "alt": "Your videos look good but say nothing.", "onscreen": "WHY VISUALS NEED EMOTION" },
+                "veoPrompt": "Dark stormy mountains, low fog creeping in, lone figure walking toward a light, wide angle lens, 4K, cinematic tones, shallow depth, slow push-in, PNW-style moody atmosphere.",
+                "script": { "opening": "Everyone shoots for perfection. I shoot for feeling.", "body": "You don’t remember the cleanest shot. You remember the one that gave you chills.", "cta": "Follow for more truth-bombs." },
+                "shotList": [ { "id": "1A", "framing": "Wide", "fps": "24", "notes": "Dark landscape" }, { "id": "1B", "framing": "Close-Up", "fps": "60", "notes": "Emotive eyes" } ],
+                "colorGrade": { "palette": "Midnight Steel", "shadows": "#0a0a0a", "highlights": "#b8b8b8" },
+                "checklist": ["Select song", "Capture footage", "Record VO", "Post"]
+            },
+            {
+                "day": "Tuesday", "theme": "Education", "hook": { "main": "3 reasons your client videos are underperforming.", "alt": "Why your visuals aren’t converting leads.", "onscreen": "VIDEO STRATEGY MISTAKES" },
+                "veoPrompt": "Split-screen shots of smiling clients vs generic product shots, studio setup with graph overlays and movement tracking.",
+                "script": { "opening": "If you want retention, stop leading with b-roll.", "body": "Attention is bought in the first 2 seconds. Clients don’t care how smooth it looks if it doesn’t sell.", "cta": "Tag a creative who needs to stop over-editing." },
+                "shotList": [ { "id": "2A", "framing": "Medium", "fps": "30", "notes": "To-camera" }, { "id": "2B", "framing": "Split", "fps": "24", "notes": "Comparison" } ],
+                "colorGrade": { "palette": "Neutral Warm", "shadows": "#1b1b1b", "highlights": "#ffffff" },
+                "checklist": ["Select song", "Overlay edits", "Export", "Post"]
+            },
+            {
+                "day": "Wednesday", "theme": "Lifestyle", "hook": { "main": "Your business grows as fast as your discipline does.", "alt": "6:00 AM in the dark. That’s where the money is made.", "onscreen": "THE 4-HOUR DEEP WORK ROUTINE" },
+                "veoPrompt": "Cinematic montage, gym setting, dark industrial lighting, sweat on skin, heavy contrast, neon green rim light, macro shots of weights moving.",
+                "script": { "opening": "Everyone wants the agency, nobody wants the anxiety.", "body": "Building a brand isn't about the viral hits. It's about the days you don't want to post, but do it anyway.", "cta": "Drop a 🔥 if you're building." },
+                "shotList": [ { "id": "3A", "framing": "Low Angle", "fps": "24", "notes": "Deadlift setup" }, { "id": "3B", "framing": "POV", "fps": "60", "notes": "Walking into studio" } ],
+                "colorGrade": { "palette": "Grit & Grain", "shadows": "#050505", "highlights": "#39ff14" },
+                "checklist": ["Gym shoot", "Office timelapse", "Edit", "Post"]
+            },
+            {
+                "day": "Thursday", "theme": "BTS Breakdown", "hook": { "main": "Stop using speed ramps like a rookie.", "alt": "This one setting changed my entire editing workflow.", "onscreen": "FIX YOUR PACING 📉" },
+                "veoPrompt": "Top-down view of a messy creative desk, mechanical keyboard, grading panel, monitors glowing with timeline.",
+                "script": { "opening": "Your edits feel choppy because you're cutting on visuals, not audio.", "body": "Here is the 'J-Cut' technique I use to make 60-second ads feel like 10-second movies.", "cta": "Save this for later." },
+                "shotList": [ { "id": "4A", "framing": "Top Down", "fps": "24", "notes": "Hands on keys" }, { "id": "4B", "framing": "Screen Rec", "fps": "60", "notes": "Timeline zoom" } ],
+                "colorGrade": { "palette": "Studio Clean", "shadows": "#1a1a1a", "highlights": "#ffffff" },
+                "checklist": ["Screen record", "Record VO", "Edit", "Post"]
+            },
+            {
+                "day": "Friday", "theme": "Portfolio Spec", "hook": { "main": "(Visuals Only)", "alt": "Imagine waking up here.", "onscreen": "THE EVERETT MARINA 🛥️" },
+                "veoPrompt": "Luxury marina at sunset, yachts docked, water shimmering, drone shot flying low over water, golden hour.",
+                "script": { "opening": "(Music Driven)", "body": "(Visual montage of lifestyle elements)", "cta": "DM 'VISUALS' to book." },
+                "shotList": [ { "id": "5A", "framing": "Drone Wide", "fps": "60", "notes": "Marina reveal" }, { "id": "5B", "framing": "Detail", "fps": "120", "notes": "Water shimmering" } ],
+                "colorGrade": { "palette": "Golden Hour", "shadows": "#2b1b1b", "highlights": "#fff3b0" },
+                "checklist": ["Shoot Marina B-roll", "Color Grade", "Sync Music", "Post"]
+            }
+        ];
+
+        // 2. BUILD THE DASHBOARD
+        const grid = document.getElementById('dashboardGrid');
+        
+        week2Data.forEach((data, index) => {
+            const card = document.createElement('div');
+            card.className = `bg-cineDark border border-gray-800 p-5 rounded-lg cursor-pointer hover:border-cineGreen transition h-64 flex flex-col justify-between group relative overflow-hidden`;
+            card.onclick = () => loadModal(index);
+            
+            card.innerHTML = `
+                <div class="absolute top-0 right-0 w-16 h-16 bg-cineGreen/5 rounded-bl-full -mr-8 -mt-8 transition group-hover:bg-cineGreen/20"></div>
+                <div>
+                    <h3 class="font-bold text-lg text-white group-hover:text-cineGreen transition">${data.day.toUpperCase()}</h3>
+                    <p class="text-sm text-gray-500 mb-4">${data.theme}</p>
+                    <p class="text-sm font-medium leading-tight text-gray-300">"${data.hook.onscreen}"</p>
+                </div>
+                <div class="mt-4">
+                     <div class="flex items-center text-xs text-gray-600 mb-2">
+                        <span class="w-2 h-2 bg-gray-600 rounded-full mr-2 group-hover:bg-cineGreen"></span> Pending
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // 3. MODAL LOGIC
+        const modal = document.getElementById('editorModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function loadModal(index) {
+            const data = week2Data[index];
+            
+            // Populate Fields
+            document.getElementById('modalTitle').innerHTML = `${data.day.toUpperCase()} <span class="mx-3 text-gray-600">/</span> <span class="text-cineGreen">${data.theme}</span>`;
+            document.getElementById('inpMainHook').value = data.hook.main;
+            document.getElementById('inpAltHook').value = data.hook.alt;
+            document.getElementById('inpOnScreen').value = data.hook.onscreen;
+            document.getElementById('txtVeoPrompt').innerText = `"${data.veoPrompt}"`;
+            document.getElementById('txtScriptOpen').innerText = `"${data.script.opening}"`;
+            document.getElementById('txtScriptBody').innerText = `"${data.script.body}"`;
+            document.getElementById('txtScriptCTA').innerText = `"${data.script.cta}"`;
+            document.getElementById('txtGradePalette').innerText = `🎨 Grade: ${data.colorGrade.palette}`;
+            document.getElementById('colShadow').innerText = data.colorGrade.shadows;
+            document.getElementById('colHigh').innerText = data.colorGrade.highlights;
+
+            // Build Shot Table
+            const tbody = document.getElementById('tableShots');
+            tbody.innerHTML = '';
+            data.shotList.forEach(shot => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-800/50">
+                        <td class="p-2 font-bold text-white">${shot.id}</td>
+                        <td class="p-2 text-gray-400">${shot.framing} / ${shot.notes}</td>
+                        <td class="p-2 text-gray-400">${shot.fps}</td>
+                    </tr>`;
+            });
+
+            // Build Checklist
+            const checkList = document.getElementById('listChecklist');
+            checkList.innerHTML = '';
+            data.checklist.forEach(item => {
+                checkList.innerHTML += `
+                    <label class="flex items-center space-x-3 cursor-pointer group">
+                        <div class="w-5 h-5 border border-gray-600 rounded flex items-center justify-center group-hover:border-cineGreen"><div class="w-3 h-3 bg-cineGreen hidden"></div></div>
+                        <span class="text-sm text-gray-300 group-hover:text-white">${item}</span>
+                    </label>`;
+            });
+
+            // Open Modal Animation
+            modal.classList.remove('hidden');
+            setTimeout(() => { modalContent.classList.remove('translate-x-full'); }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.add('translate-x-full');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+    </script>
+</body>
+</html>
